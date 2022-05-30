@@ -1,0 +1,42 @@
+@use "./global.scss" as *;
+
+.container {
+  width: 100%;
+  header {
+    .content {
+      width: 100%;
+      @include flex(space-between, center, fls, 10px);
+      img {
+        @include raduise(45px, 45px, 50%, transparent);
+      }
+      > ion-icon {
+        font-size: $mainFont * 1.6;
+        z-index: 5;
+        @include media(md) {
+          z-index: 2000;
+        }
+      }
+      .search {
+        position: relative;
+        @include flex(flex-start, center, fls, 5px);
+        input {
+          border: 1px solid $activeColor;
+          outline: 0;
+          padding: 0 40px;
+          font-weight: 600;
+          color: $activeColor;
+          font-size: $mainFont / 1.2;
+          @include raduise(100%, 30px, 30px, transparent);
+        }
+        input::placeholder {
+          color: fixColor($activeColor, 0.5);
+        }
+        ion-icon {
+          position: absolute;
+          left: 20px;
+          color: fixColor($activeColor, 0.5);
+        }
+      }
+    }
+  }
+}

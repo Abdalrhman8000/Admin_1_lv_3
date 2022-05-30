@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+$mainColor: #fff;
+$activeColor: rgb(19, 59, 133);
+$greenColor: rgb(0, 128, 128);
+$blueColor: rgb(10, 104, 148);
+$yellowColor: rgb(199, 95, 10);
+$grayColor: rgb(68, 68, 68);
+$mainMargin: 50px;
+$mainFont: 1.3rem;
+$navWidth: 300px;
+$status: false;
+$ListColor: (
+  "greenColor": $greenColor,
+  "blueColor": $blueColor,
+  "yellowColor": $yellowColor,
+  "activeColor": $activeColor,
+);
+* > *,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "Roboto Condensed", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+body {
+  height: 100vh;
+  overflow-x: hidden;
+}
+ion-icon,
+button,
+input,
+img {
+  z-index: 2;
+  cursor: pointer;
+}
+@mixin raduise($w, $h, $r, $c) {
+  border-radius: $r;
+  width: $w;
+  height: $h;
+  background-color: $c;
+}
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@function fixColor($c, $o) {
+  @return rgba($color: $c, $alpha: $o);
+}
+@mixin flex($j, $a, $w, $p) {
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  padding: $p;
+  @if $w == true {
+    flex-wrap: wrap;
+  } @else {
+    flex-wrap: nowrap;
+  }
+}
+@mixin shadow($x, $y, $b, $o, $c, $p) {
+  box-shadow: $x $y $b $o rgba($color: $c, $alpha: $p);
+}
+@mixin media($size) {
+  @if $size == lg {
+    @media screen and (min-width: 1065px) and (max-width: 1200px) {
+      @content;
+    }
+  } @else if $size == md {
+    @media screen and (min-width: 667px) and (max-width: 900px) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: 300px) and (max-width: 666px) {
+      @content;
+    }
+  }
+}
+@each $name, $color in $ListColor {
+  .#{$name} {
+    background-color: $color;
+  }
+}
+%affter {
+  content: "";
+  top: -50px;
+  right: 0px;
+  position: absolute;
+  z-index: 10;
+  @include shadow(35px, 35px, 0, 10px, $mainColor, 1);
+  @include raduise(50px, 50px, 50%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+%before {
+  content: "";
+  bottom: -50px;
+  right: 0px;
+  position: absolute;
+  z-index: 10;
+  @include shadow(35px, -35px, 0, 10px, $mainColor, 1);
+  @include raduise(50px, 50px, 50%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.active {
+  background-color: $mainColor;
+  color: $activeColor;
+}
+.active {
+  span {
+    color: $activeColor !important;
+  }
+}
+.active::after {
+  @extend %affter;
+}
+.active::before {
+  @extend %before;
+}
+section {
+  @include flex(flex-start, flex-start, fl, 0);
+}
+.active_nav_sm {
+  width: $navWidth/2;
+  @include media(sm) {
+    width: 80% !important;
+    position: fixed;
+  }
+
+  z-index: 4;
+  ul {
+    li {
+      a {
+        @include flex(center, center, fls, 0);
+        & span:last-child {
+          position: absolute;
+          left: -100%;
+          z-index: -1000;
+        }
+      }
+      &:hover a span:first-child {
+        z-index: -1000;
+      }
+      &:hover span:last-child {
+        z-index: 1000;
+      }
+    }
+  }
+}

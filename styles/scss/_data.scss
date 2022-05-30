@@ -1,0 +1,40 @@
+@use "./global.scss" as *;
+
+.data_parent {
+  @include flex(space-between, center, true, 40px);
+  .cont {
+    margin: 10px;
+    z-index: 3;
+    transition: scale 0.5s ease-in-out;
+    @include raduise(100% / 5, 80px, 5%, $mainColor);
+    @include flex(space-between, center, fls, 10px);
+    border: solid 2px fixColor($activeColor, 0.5);
+    @include media(sm) {
+      @include raduise(100% / 1, 80px, 5%, $mainColor);
+    }
+    @include media(md) {
+      @include raduise(100% / 3, 80px, 5%, $mainColor);
+    }
+    &:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+    ion-icon {
+      font-size: $mainFont * 1.3;
+    }
+    .text {
+      @include flex(space-between, flex-start, fls, 0);
+      flex-direction: column;
+      .num {
+        color: $activeColor;
+        font-size: $mainFont;
+        font-weight: 600;
+      }
+      & span:last-child {
+        margin: 5px 0;
+        color: $grayColor;
+        font-size: $mainFont/1.6;
+      }
+    }
+  }
+}

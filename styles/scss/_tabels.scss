@@ -1,0 +1,149 @@
+@use "./global.scss" as *;
+
+.taples_parent {
+  width: 100%;
+  @include flex(space-between, flex-start, true, 20px);
+  .cont_1 {
+    width: 65%;
+    height: 450px;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 100;
+    border: solid 2px fixColor($activeColor, 0.5);
+    @include media(md) {
+      width: 100%;
+    }
+    @include media(sm) {
+      width: 100%;
+      max-height: 300px;
+      z-index: 1;
+      thead,
+      tbody {
+        tr {
+          td {
+            padding: 5px !important;
+            font-size: $mainFont/1.5;
+          }
+        }
+      }
+      .title {
+        button {
+          padding: 5px 10px !important;
+        }
+        h3 {
+          font-size: $mainFont/1.2;
+        }
+        @include flex(space-between, center, fls, 10px !important);
+      }
+      tbody {
+        tr {
+          td:last-child {
+            span {
+              padding: 2px 5px !important;
+              font-size: $mainFont/1.5;
+            }
+          }
+        }
+      }
+    }
+    table {
+      width: 100%;
+      overflow: hidden;
+      thead,
+      tbody {
+        tr {
+          td {
+            padding: 20px;
+            border-bottom: 1px solid fixColor($grayColor, 0.4);
+            text-align: center;
+          }
+        }
+      }
+      thead {
+        tr {
+          td {
+            font-weight: 600;
+          }
+        }
+      }
+      tbody {
+        tr:last-child {
+          td {
+            border-bottom: none;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td:last-child {
+            color: $mainColor;
+            span {
+              transition: all 0.5s ease;
+              padding: 4px 10px;
+              border-radius: 5px;
+              cursor: pointer;
+              display: block;
+              &:hover {
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+      }
+    }
+    .title {
+      h3 {
+        color: $activeColor;
+      }
+      button {
+        padding: 10px 30px;
+        outline: 0;
+        border: 0;
+        border-radius: 5px;
+        color: $mainColor;
+        background-color: $activeColor;
+        transition: all 0.5s ease;
+      }
+      button:hover {
+        background-color: $blueColor;
+        transform: scale(1.1);
+      }
+      @include flex(space-between, center, fls, 30px);
+    }
+  }
+  .custom_parent {
+    width: 33%;
+    height: 450px;
+    padding: 10px;
+    overflow: auto;
+    border: solid 2px fixColor($activeColor, 0.5);
+    @include media(md) {
+      margin-top: 50px;
+      width: 100%;
+    }
+    h3 {
+      color: $activeColor;
+    }
+    .cont {
+      padding: 20px;
+      margin-top: 20px;
+      @include flex(flex-start, center, fs, 30px);
+      img {
+        @include raduise(45px, 45px, 50%, transparent);
+      }
+      .text {
+        margin-left: 10px;
+        @include flex(flex-start, center, fs, 10px);
+        flex-direction: column;
+        & span:nth-child(1) {
+          font-weight: 600;
+        }
+        & span:nth-child(2) {
+          color: $grayColor;
+          font-size: $mainFont/1.5;
+        }
+      }
+    }
+  }
+}
